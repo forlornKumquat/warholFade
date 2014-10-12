@@ -1,0 +1,115 @@
+<script>
+
+window.r=60;
+window.g=170;
+window.b=0;
+window.rUp=1;
+window.gUp=1;
+window.bUp=1;
+
+var myImag="";
+
+//here we are doing random color changes that occur dramaticaly
+function clipIt(){
+	document.getElementById("hue1").style.background = "rgba("+Math.floor((Math.random() * 255) + 1)+","+Math.floor((Math.random() * 255) + 1)+","+Math.floor((Math.random() * 255) + 1)+",0.5)";
+	document.getElementById("hue2").style.background = "rgba("+Math.floor((Math.random() * 255) + 1)+","+Math.floor((Math.random() * 255) + 1)+","+Math.floor((Math.random() * 255) + 1)+",0.5)";
+	document.getElementById("hue3").style.background = "rgba("+Math.floor((Math.random() * 255) + 1)+","+Math.floor((Math.random() * 255) + 1)+","+Math.floor((Math.random() * 255) + 1)+",0.5)";
+	document.getElementById("hue4").style.background = "rgba("+Math.floor((Math.random() * 255) + 1)+","+Math.floor((Math.random() * 255) + 1)+","+Math.floor((Math.random() * 255) + 1)+",0.5)";
+}
+
+//here we are doing a more fluid fade of colors.  We keep track of values that are gradualy increasing and then decreasing.
+//could probably use more finess in code, but for now it does what it is supposed to do
+function updateVars(){
+	if(window.rUp==1){
+		window.r+=5;
+		if(window.r>=255){
+			window.r=255;
+			window.rUp=0;
+		}
+	}
+	if(window.gUp==1){
+		window.g+=7;
+		if(window.g>=255){
+			window.g=255;
+			window.gUp=0;
+		}
+	}
+	if(window.bUp==1){
+		window.b+=3;
+		if(window.b>=255){
+			window.b=255;
+			window.bUp=0;
+		}
+	}
+
+	if(window.rUp==0){
+		window.r-=3;
+		if(window.r<=0){
+			window.r=0;
+			window.rUp=1;
+		}
+	}
+	if(window.gUp==0){
+		window.g-=6;
+		if(window.g<=0){
+			window.g=0;
+			window.gUp=1;
+		}
+	}
+	if(window.bUp==0){
+		window.b-=4;
+		if(window.b<=0){
+			window.g=0;
+			window.bUp=1;
+		}
+	}
+}
+//This funciton updates the more fluid hue transition
+function clipItToo(){
+	updateVars();
+
+	document.getElementById("hue5").style.background = "rgba("+window.r+","+0+","+0+",0.5)";
+	document.getElementById("hue6").style.background = "rgba("+window.b+","+0+","+window.g+",0.5)";
+	document.getElementById("hue7").style.background = "rgba("+0+","+window.b+","+window.r+",0.5)";
+	document.getElementById("hue8").style.background = "rgba("+window.r+","+0+","+window.g+",0.5)";
+}
+</script>
+
+<!--Just positioned some fixed images, with empty place holder over them.  Still get broken image icon with firefox and maybe chrome?-->
+	<img src="m.jpg" style="position:fixed; top:0px; left:0px;">
+	<img id="hue1" style="position:fixed; top:0px; left:0px; width:100px; height:100px; background: rgba(255,0,0,0.5);">
+
+	<img src="m.jpg" style="position:fixed; top:100px; left:0px;">
+	<img id="hue2" style="position:fixed; top:100; left:0px; width:100px; height:100px; background: rgba(0,255,0,0.5);">
+
+	<img src="m.jpg" style="position:fixed; top:0px; left:100px;">
+	<img id="hue3" style="position:fixed; top:0px; left:100px; width:100px; height:100px; background: rgba(0,0,255,0.5);">
+
+	<img src="m.jpg" style="position:fixed; top:100px; left:100px;">
+	<img id="hue4" style="position:fixed; top:100px; left:100px; width:100px; height:100px; background: rgba(255,255,255,0.5);">
+
+
+<p style="position:fixed; top:210px;">
+Pulled these images from <a href="http://en.wikipedia.org/wiki/Marilyn_Monroe#mediaviewer/File:Marilyn_Monroe_-_publicity.JPG">http://en.wikipedia.org/wiki/Marilyn_Monroe#mediaviewer/File:Marilyn_Monroe_-_publicity.JPG</a>
+<br>
+I mean, you got to have some Marilyn with your Warhol.
+</p>
+
+	<img src="sLuke.jpg" style="position:fixed; top:300px; left:0px;">
+	<img id="hue5" style="position:fixed; top:300px; left:0px; width:100px; height:150px; background: rgba(255,0,0,0.5);">
+
+	<img src="sLuke.jpg" style="position:fixed; top:450px; left:0px;">
+	<img id="hue6" style="position:fixed; top:450; left:0px; width:100px; height:150px; background: rgba(0,255,0,0.5);">
+
+	<img src="sLuke.jpg" style="position:fixed; top:300px; left:100px;">
+	<img id="hue7" style="position:fixed; top:300px; left:100px; width:100px; height:150px; background: rgba(0,0,255,0.5);">
+
+	<img src="sLuke.jpg" style="position:fixed; top:450px; left:100px;">
+	<img id="hue8" style="position:fixed; top:450px; left:100px; width:100px; height:150px; background: rgba(255,255,255,0.5);">
+
+<script>
+//dramatic hue pop ever 3 seconds
+window.setInterval(clipIt,3000);
+//smooth hue
+window.setInterval(clipItToo,50);
+</script>
